@@ -11,82 +11,83 @@
             overflow: hidden;
             height: 100%;
             background: #000;
+            cursor: pointer;
         }
         #canvas {
             display: block;
         }
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 16px;
+            color: #888;
+        }
     </style>
 </head>
 <body>
+    <div class="footer">by Yuan Aoguan</div>
     <canvas id="canvas"></canvas>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const renderer = new THREE.WebGLRenderer({ canvas });
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 50;
 
-        const particlesArray = [];
-        const numberOfParticles = 100;
+        const particles = [];
+        const particleCount = 2000;
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
 
-        class Particle {
-            constructor(x, y, size, color, weight) {
-                this.x = x;
-                this.y = y;
-                this.size = size;
-                this.color = color;
-                this.weight = weight;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-            update() {
-                this.size -= 0.05;
-                if (this.size < 0) {
-                    this.x = (Math.random() * canvas.width) - canvas.width / 2;
-                    this.y = (Math.random() * canvas.height) - canvas.height / 2;
-                    this.size = (Math.random() * 5) + 2;
-                    this.weight = (Math.random() * 2) - 0.5;
-                }
-                this.y += this.weight;
-                this.weight += 0.05;
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 200;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 200;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 200;
 
-                if (this.y > canvas.height) {
-                    this.weight *= -0.2;
-                }
-            }
+            colors[i * 3] = Math.random();
+            colors[i * 3 + 1] = Math.random();
+            colors[i * 3 + 2] = Math.random();
         }
 
-        function init() {
-            for (let i = 0; i < numberOfParticles; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const size = (Math.random() * 5) + 2;
-                const color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
-                const weight = 1;
-                particlesArray.push(new Particle(x, y, size, color, weight));
-            }
-        }
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 2,
+            vertexColors: true,
+            transparent: true,
+            opacity: 0.7
+        });
+
+        const particleSystem = new THREE.Points(geometry, material);
+        scene.add(particleSystem);
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
             requestAnimationFrame(animate);
+            particleSystem.rotation.y += 0.001;
+            renderer.render(scene, camera);
         }
 
-        init();
-        animate();
+        function onMouseMove(event) {
+            const mouseX = event
+            const mouseX = event.clientX - window.innerWidth / 2;
+            const mouseY = event.clientY - window.innerHeight / 2;
+            particleSystem.rotation.x = mouseY * 0.0002;
+            particleSystem.rotation.y = mouseX * 0.0002;
+        }
 
-        window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        window.addEventListener('mousemove', onMouseMove, false);
+        renderer.setSize(window.innerWidth, window.innerHeight);
     </script>
 </body>
 </html>
