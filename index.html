@@ -1,215 +1,125 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>祝福网页</title>
+    <title>河北省中考查分网站</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrQkTy8u0vO7ShAxUK3H2D5j62kBoNsuzhz3hjfbkZtA/tyWbNHkJm2io0og0PYcbMbqqnVBXkspX2e9XQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            overflow: hidden; /* 隐藏粒子溢出的部分 */
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #e9f5ff;
         }
         .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
             text-align: center;
-            position: relative;
         }
         h1 {
-            font-size: 48px;
+            color: #333;
             margin-bottom: 20px;
         }
-        p {
-            font-size: 24px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        #particles-js {
-            position: absolute;
+        input, button {
             width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1; /* 将粒子效果放在底层 */
-            display: none; /* 初始隐藏粒子效果 */
-        }
-        #love {
-            font-size: 72px;
-            color: red;
-            margin-top: 20px;
-            display: none; /* 初始隐藏爱心文字 */
-        }
-        .footer {
-            font-size: 18px;
-            color: #888;
-            margin-top: 20px;
-            display: none; /* 初始隐藏页脚信息 */
-        }
-        .btn {
-            padding: 10px 20px;
-            font-size: 20px;
-            color: #fff;
-            background-color: #ff4500;
-            border: none;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
             cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button i {
+            margin-right: 10px;
+        }
+        .result {
             margin-top: 20px;
+            display: none;
+            text-align: left;
+        }
+        .result p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .alert {
+            color: red;
+            display: none;
+            margin-top: 10px;
+        }
+        .icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #007bff;
         }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div class="container">
-        <h1>祝福乔科欣和刘诗怡</h1>
-        <p>乔科欣永远爱刘诗怡</p>
-        <div id="love">❤️ I love you ❤️</div>
-        <div class="footer">by Yuan Aoguan</div>
-        <button class="btn" onclick="location.href='particles-game.html'">炫彩粒子游戏</button>
+
+<div class="container">
+    <div class="icon">
+        <i class="fas fa-graduation-cap"></i>
     </div>
+    <h1>河北省中考查分网站</h1>
+    <input type="text" id="name" placeholder="请输入名字">
+    <button onclick="checkScore()"><i class="fas fa-search"></i>查询分数</button>
+    <div class="result" id="result">
+        <p>地理分数: <span id="geoScore"></span> / 60</p>
+        <p>生物分数: <span id="bioScore"></span> / 60</p>
+        <p>总分: <span id="totalScore"></span> / 120</p>
+    </div>
+    <div class="alert" id="alert">没有找到该学生的成绩</div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // 计数器
-        let clickCount = 0;
+<script>
+    function getRandomScore(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
-        // 点击事件监听
-        document.addEventListener('click', function() {
-            clickCount++;
-            if (clickCount === 7) {
-                // 显示黑屏背景
-                document.body.style.backgroundColor = '#000';
-                document.body.style.color = '#fff';
+    function checkScore() {
+        var name = document.getElementById('name').value.trim();
+        var resultDiv = document.getElementById('result');
+        var alertDiv = document.getElementById('alert');
+        var geoScore, bioScore;
 
-                // 显示粒子效果
-                document.getElementById('particles-js').style.display = 'block';
+        if (name === "苑翱冠") {
+            geoScore = 54;
+            bioScore = 56;
+        } else if (name === "王康乐") {
+            geoScore = 46;
+            bioScore = 43;
+        } else {
+            geoScore = getRandomScore(45, 55);
+            bioScore = getRandomScore(45, 55);
+        }
 
-                // 播放背景音乐
-                let audio = new Audio('your_bg_music.mp3');
-                audio.loop = true;
-                audio.play();
+        document.getElementById('geoScore').innerText = geoScore;
+        document.getElementById('bioScore').innerText = bioScore;
+        document.getElementById('totalScore').innerText = geoScore + bioScore;
+        resultDiv.style.display = 'block';
+        alertDiv.style.display = 'none';
+    }
+</script>
 
-                // 显示爱心文字和页脚
-                document.getElementById('love').style.display = 'block';
-                document.querySelector('.footer').style.display = 'block';
-            }
-        });
-
-        // 粒子效果初始化
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ff4500"
-                },
-                "shape": {
-                    "type": "heart",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    },
-                    "polygon": {
-                        "nb_sides": 5
-                    },
-                    "image": {
-                        "src": "img/github.svg",
-                        "width": 100,
-                        "height": 100
-                    }
-                },
-                "opacity": {
-                    "value": 0.8,
-                    "random": false,
-                    "anim": {
-                        "enable": false,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 10,
-                    "random": true,
-                    "anim": {
-                        "enable": false,
-                        "speed": 40,
-                        "size_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#ff4500",
-                    "opacity": 0.6,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 3,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 200,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 200,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-    </script>
 </body>
 </html>
