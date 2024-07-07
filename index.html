@@ -8,20 +8,23 @@
     <style>
         body {
             font-family: 'Noto Serif SC', serif;
-            background: linear-gradient(to right, #4facfe, #00f2fe);
+            background: url('https://example.com/background.jpg') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
         .container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px 50px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
-            max-width: 800px;
+            max-width: 700px;
+            animation: fadeIn 2s ease-in-out;
         }
         .container h1 {
             font-family: 'Lobster', cursive;
@@ -44,6 +47,17 @@
             color: #ff6347;
             font-weight: bold;
         }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        audio {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -51,7 +65,11 @@
         <h1>给朋友的鼓励</h1>
         <p>我的朋友，你不必沮丧。现在对的每一道题，都是为了遇见更好的自己。在求学道路上磕磕绊绊，我想说高中会考上的。三年如风，祝你勇敢坚强，乐观且豁达。能经住成长道路上的磕绊，也能笑对人生旅程的曲折。三年磨一剑，出鞘必锋芒。最后祝你中考大捷。</p>
         <p class="signature">—— <span class="highlight">jbb</span></p>
-        <p class="signature">这个文案不是yag写的，是<span class="highlight">jbb</span>写的。</p>
+        <p class="signature">这个文案不是yag写的，是 <span class="highlight">jbb</span> 写的。</p>
     </div>
+    <audio autoplay loop>
+        <source src="https://example.com/background-music.mp3" type="audio/mpeg">
+        您的浏览器不支持音频标签。
+    </audio>
 </body>
 </html>
