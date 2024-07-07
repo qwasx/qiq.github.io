@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Noto Serif SC', serif;
-            background: url('https://example.com/background.jpg') no-repeat center center fixed;
+            background: url('background.jpg') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
@@ -18,7 +18,7 @@
             overflow: hidden;
         }
         .container {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             padding: 40px 60px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -47,6 +47,14 @@
             color: #ff6347;
             font-weight: bold;
         }
+        .container .link {
+            margin-top: 20px;
+        }
+        .container .link a {
+            text-decoration: none;
+            color: #1e90ff;
+            font-weight: bold;
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -66,9 +74,12 @@
         <p>我的朋友，你不必沮丧。现在对的每一道题，都是为了遇见更好的自己。在求学道路上磕磕绊绊，我想说高中会考上的。三年如风，祝你勇敢坚强，乐观且豁达。能经住成长道路上的磕绊，也能笑对人生旅程的曲折。三年磨一剑，出鞘必锋芒。最后祝你中考大捷。</p>
         <p class="signature">—— <span class="highlight">jbb</span></p>
         <p class="signature">这个文案不是yag写的，是 <span class="highlight">jbb</span> 写的。</p>
+        <div class="link">
+            <a href="https://poki.com/zh" target="_blank">点击这里访问Poki网站</a>
+        </div>
     </div>
     <audio autoplay loop>
-        <source src="https://example.com/background-music.mp3" type="audio/mpeg">
+        <source src="background-music.mp3" type="audio/mpeg">
         您的浏览器不支持音频标签。
     </audio>
 </body>
