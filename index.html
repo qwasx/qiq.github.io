@@ -1,125 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>河北省中考查分网站</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrQkTy8u0vO7ShAxUK3H2D5j62kBoNsuzhz3hjfbkZtA/tyWbNHkJm2io0og0PYcbMbqqnVBXkspX2e9XQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>励志网页</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            background-color: #e9f5ff;
+            margin: 0;
         }
         .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
+            max-width: 800px;
         }
-        h1 {
+        .container h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 3em;
+            margin-bottom: 20px;
             color: #333;
+        }
+        .container p {
+            font-size: 1.2em;
+            line-height: 1.8;
             margin-bottom: 20px;
+            color: #555;
         }
-        input, button {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
+        .container .signature {
+            font-size: 1em;
+            color: #777;
+            margin-top: 30px;
         }
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        button i {
-            margin-right: 10px;
-        }
-        .result {
-            margin-top: 20px;
-            display: none;
-            text-align: left;
-        }
-        .result p {
-            margin: 5px 0;
-            font-size: 16px;
-        }
-        .alert {
-            color: red;
-            display: none;
-            margin-top: 10px;
-        }
-        .icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-            color: #007bff;
+        .container .highlight {
+            color: #ff6347;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="icon">
-        <i class="fas fa-graduation-cap"></i>
+    <div class="container">
+        <h1>给朋友的鼓励</h1>
+        <p>我的朋友，你不必沮丧。现在对的每一道题，都是为了遇见更好的自己。在求学道路上磕磕绊绊，我想说高中会考上的。三年如风，祝你勇敢坚强，乐观且豁达。能经住成长道路上的磕绊，也能笑对人生旅程的曲折。三年磨一剑，出鞘必锋芒。最后祝你中考大捷。</p>
+        <p class="signature">—— <span class="highlight">jbb</span></p>
+        <p class="signature">这个文案不是yag写的，是<span class="highlight">jbb</span>写的。</p>
     </div>
-    <h1>河北省中考查分网站</h1>
-    <input type="text" id="name" placeholder="请输入名字">
-    <button onclick="checkScore()"><i class="fas fa-search"></i>查询分数</button>
-    <div class="result" id="result">
-        <p>地理分数: <span id="geoScore"></span> / 60</p>
-        <p>生物分数: <span id="bioScore"></span> / 60</p>
-        <p>总分: <span id="totalScore"></span> / 120</p>
-    </div>
-    <div class="alert" id="alert">没有找到该学生的成绩</div>
-</div>
-
-<script>
-    function getRandomScore(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function checkScore() {
-        var name = document.getElementById('name').value.trim();
-        var resultDiv = document.getElementById('result');
-        var alertDiv = document.getElementById('alert');
-        var geoScore, bioScore;
-
-        if (name === "苑翱冠") {
-            geoScore = 54;
-            bioScore = 56;
-        } else if (name === "王康乐") {
-            geoScore = 46;
-            bioScore = 43;
-        } else {
-            geoScore = getRandomScore(45, 55);
-            bioScore = getRandomScore(45, 55);
-        }
-
-        document.getElementById('geoScore').innerText = geoScore;
-        document.getElementById('bioScore').innerText = bioScore;
-        document.getElementById('totalScore').innerText = geoScore + bioScore;
-        resultDiv.style.display = 'block';
-        alertDiv.style.display = 'none';
-    }
-</script>
-
 </body>
 </html>
