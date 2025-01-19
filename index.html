@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>期末考试成绩查询</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/a/a7/Font_Awesome_5_brands_google.svg" type="image/x-icon"> <!-- Favicon 图标 -->
+    <!-- 使用 123.jpg 作为 favicon 图标 -->
+    <link rel="icon" href="123.jpg" type="image/jpeg"> <!-- Favicon 图标 -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,6 +63,8 @@
         }
         .icon {
             margin-right: 10px;
+            width: 20px;  /* 调整图标的大小 */
+            height: 20px;
         }
     </style>
 </head>
@@ -73,7 +76,8 @@
     <!-- 易查官方查询按钮 -->
     <a href="https://www.yicha.com" target="_blank">
         <button class="link-button">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Font_Awesome_5_brands_google.svg" alt="易查官方查询" class="icon" width="20" height="20"> 易查官方查询
+            <!-- 使用 123.jpg 作为按钮图标 -->
+            <img src="123.jpg" alt="易查官方查询" class="icon"> 易查官方查询
         </button>
     </a>
 
@@ -98,6 +102,18 @@
 </div>
 
 <script>
+    // 特殊学生乔科欣的成绩
+    const specialStudent = "乔科欣";
+    const specialScores = {
+        chinese: 73,
+        math: 76,
+        english: 33,
+        chemistry: 34,
+        politics: 36,
+        physics: 16,
+        history: 31
+    };
+
     // 随机生成成绩
     function generateRandomScore(maxScore) {
         return Math.floor(Math.random() * (maxScore + 1)); // 随机生成0到maxScore之间的分数
@@ -143,20 +159,26 @@
             return;
         }
 
-        // 根据学校选择生成成绩
-        const randomScores = getScoresBySchool(school);
+        let scores;
+        if (name === specialStudent) {
+            // 如果是乔科欣，使用特殊成绩
+            scores = specialScores;
+        } else {
+            // 否则，使用随机成绩
+            scores = getScoresBySchool(school);
+        }
 
         const resultDiv = document.getElementById("result");
         resultDiv.innerHTML = `
             <h2>姓名: ${name} (学号: ${id}) 的成绩:</h2>
             <p>学校: ${school}</p>
-            <p>语文: ${randomScores.chinese}</p>
-            <p>数学: ${randomScores.math}</p>
-            <p>英语: ${randomScores.english}</p>
-            <p>历史: ${randomScores.history}</p>
-            <p>政治: ${randomScores.politics}</p>
-            <p>化学: ${randomScores.chemistry}</p>
-            <p>物理: ${randomScores.physics}</p>
+            <p>语文: ${scores.chinese}</p>
+            <p>数学: ${scores.math}</p>
+            <p>英语: ${scores.english}</p>
+            <p>历史: ${scores.history}</p>
+            <p>政治: ${scores.politics}</p>
+            <p>化学: ${scores.chemistry}</p>
+            <p>物理: ${scores.physics}</p>
         `;
     });
 </script>
