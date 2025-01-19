@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>期末考试成绩查询</title>
-    <!-- 使用 123.jpg 作为 favicon 图标 -->
-    <link rel="icon" href="123.jpg" type="image/jpeg"> <!-- Favicon 图标 -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,14 +31,14 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff; /* 设置为蓝色 */
+            background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #0056b3; /* 设置蓝色按钮悬停效果 */
+            background-color: #0056b3;
         }
         .result {
             margin-top: 20px;
@@ -51,7 +49,7 @@
         .link-button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff; /* 设置为蓝色 */
+            background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -59,12 +57,7 @@
             text-align: center;
         }
         .link-button:hover {
-            background-color: #0056b3; /* 设置蓝色按钮悬停效果 */
-        }
-        .icon {
-            margin-right: 10px;
-            width: 20px;  /* 调整图标的大小 */
-            height: 20px;
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -73,11 +66,9 @@
 <div class="container">
     <h1>期末考试成绩查询</h1>
     
-    <!-- 易查官方查询按钮 -->
     <a href="https://www.yicha.com" target="_blank">
         <button class="link-button">
-            <!-- 使用 123.jpg 作为按钮图标 -->
-            <img src="123.jpg" alt="易查官方查询" class="icon"> 易查官方查询
+            易查官方查询
         </button>
     </a>
 
@@ -102,7 +93,6 @@
 </div>
 
 <script>
-    // 特殊学生乔科欣的成绩
     const specialStudent = "乔科欣";
     const specialScores = {
         chinese: 73,
@@ -114,12 +104,10 @@
         history: 31
     };
 
-    // 随机生成成绩
     function generateRandomScore(maxScore) {
-        return Math.floor(Math.random() * (maxScore + 1)); // 随机生成0到maxScore之间的分数
+        return Math.floor(Math.random() * (maxScore + 1));
     }
 
-    // 根据学校选择返回成绩
     function getScoresBySchool(school) {
         let randomScores;
         if (school === "实验中学") {
@@ -134,10 +122,10 @@
             };
         } else if (school === "毛遂中学") {
             randomScores = {
-                chinese: generateRandomScore(110), // 毛遂中学的语文可能稍低
-                math: generateRandomScore(115), // 毛遂中学的数学稍高
-                english: generateRandomScore(100), // 英语偏低
-                history: generateRandomScore(55), // 其他科目稍低
+                chinese: generateRandomScore(110),
+                math: generateRandomScore(115),
+                english: generateRandomScore(100),
+                history: generateRandomScore(55),
                 politics: generateRandomScore(55),
                 chemistry: generateRandomScore(55),
                 physics: generateRandomScore(55)
@@ -146,9 +134,8 @@
         return randomScores;
     }
 
-    // 处理查询表单提交
     document.getElementById("scoreForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // 阻止表单默认提交
+        event.preventDefault();
 
         const name = document.getElementById("name").value.trim();
         const id = document.getElementById("id").value.trim();
@@ -161,10 +148,8 @@
 
         let scores;
         if (name === specialStudent) {
-            // 如果是乔科欣，使用特殊成绩
             scores = specialScores;
         } else {
-            // 否则，使用随机成绩
             scores = getScoresBySchool(school);
         }
 
